@@ -1,0 +1,65 @@
+device: 0
+
+misc:
+  seed: 0
+
+experiment:
+  # image
+  input_resolution: [224, 224]
+  simclr_mlp: [512, 128, 512]
+  simclr_temperature: 0.1
+  # text
+  dropout: 0.05
+  eda_alpha: 0.05
+  text_length: 77
+
+
+  # loss
+  nitc_ratio: 1.0
+  nitc: true
+  soft_label: true
+
+  ####
+  ritc: true
+  ritc_type: softmax   # ori , sigmoid , softmax,base
+  sigmoid_ratio: 0.4
+  ritc_eps: 1.0e-8   # 1e.0-2
+  ritc_ratio: 1.0
+  
+schedule:
+  lr: 3.0e-5
+  epoch: 8
+  epoch_warmup: 1
+  lr_start: 1.0e-6
+  lr_end: 5.0e-6
+  weight_decay: 0.02
+  betas: [0.9, 0.98]
+  eps: 1.0e-8
+
+model:
+  ckpt_type: eva  # original_clip / saved /eva
+  read_path: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/output"
+  read_name: "checkpoint_last_20241006_161323"
+  saved_path: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/output"
+  checkpoint: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/EVA02_CLIP_B_psz16_s8B.pt"    # e.g., '../../data/CLIP/ViT-B-16.pt'
+  use_gather: true
+  softlabel_ratio: 0.005
+  softlabel_type: sigmoid
+  embed_dim: 512
+  vocab_size: 49408
+  config_path: "config/model_config.json"
+
+log:
+  print_period: 50
+
+data:
+  batch_size: 80
+  test_batch_size: 256
+  num_workers: 8
+
+distributed:
+  backend: nccl
+  url: 'env://'
+
+anno_dir: '/data/zzy/datasets/CUHK-PEDES/processed_data'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
+image_dir: '/data/zzy/datasets/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES
