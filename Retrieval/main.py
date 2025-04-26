@@ -58,12 +58,6 @@ def run(config):
     #                                                                                 top10=rank_10, mAP=map))
     # print(1 / 0)
 
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    # 现在将timestamp添加到文件名中
-    filename = f'checkpoint_last_{timestamp}'
-    save_path = os.path.join(config.model.saved_path, filename)
-    os.makedirs(save_path, exist_ok=True)
-
     # schedule
     config.schedule.niter_per_ep = len(train_loader)
     lr_schedule = cosine_scheduler(config)
@@ -139,13 +133,8 @@ def run(config):
                     'optimizer': optimizer.state_dict(),
                     'config': config,
                 }
-                torch.save(save_obj, os.path.join(config.model.saved_path, f'checkpoint_best_{timestamp}.pth'))
+                torch.save(save_obj, os.path.join(config.model.saved_path, 'checkpoint_best.pth'))
 
-        save_obj = {
-                        'model': model.state_dict()
-                    }
-        torch.save(save_obj, os.path.join(save_path,f"epoch{epoch}.pth"))
-        print("save_path = ",save_path)
         print(f"best Acc@1: {best_rank_1} at epoch {best_epoch + 1}")
 
 
