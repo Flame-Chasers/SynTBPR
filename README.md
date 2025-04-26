@@ -28,15 +28,16 @@ In this paper, we conduct an empirical study to explore the potential of synthet
 
 - [x] Release codes
 - [x] Release datasets
-- [ ] Release checkpoints
+- [x] Release checkpoints
 
 ## 🖨 Dataset
 
-**The dataset is released at [Baidu Yun](https://pan.baidu.com/s/1C0EKLobSIB7h7t-OC7wtvg?pwd=4tc4) [4tc4]
+The dataset is released at [Baidu Yun](https://pan.baidu.com/s/1C0EKLobSIB7h7t-OC7wtvg?pwd=4tc4) [4tc4]
 
 ## 💾 Checkpoints
 
-You can download it from here.
+The checkpoints is released at [Baidu Yun](https://pan.baidu.com/s/1MFugiq7oGOZTUXBmI5L3PA?pwd=a41g) [a41g]
+
 
 
 ## Citation
