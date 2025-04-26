@@ -5,12 +5,12 @@ import numpy as np
 from transformers import AutoProcessor, CLIPModel
 
 # 加载模型和处理器
-model_path = "/mnt/lustre/zengziyin/project/checkpoints/openai/clip-vit-large-patch14"
+model_path = "openai/clip-vit-large-patch14"
 model = CLIPModel.from_pretrained(model_path)
 processor = AutoProcessor.from_pretrained(model_path)
 
 # 定义图像文件夹路径
-image_folder_path = "/mnt/lustre/zengziyin/datasets/CUHK-PEDES/imgs/CUHK03"
+image_folder_path = "../datasets/CUHK-PEDES/imgs"
 
 # 获取文件夹中所有图片的路径
 image_paths = [os.path.join(image_folder_path, file) for file in os.listdir(image_folder_path) if file.endswith(('png', 'jpg', 'jpeg'))]

@@ -22,12 +22,8 @@ def set_seed(seed):
 
 set_seed(42)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-metric = CLIPScore(model_name_or_path="/home/share/models/clip-vit-large-patch14").to(device)
-root = '/mnt/lustre/zengziyin/datasets/generated/dreambooth_RSTPReid/eight_id/base_eval/post_data'
-images_root = 'process_data'
-json_root = 'yolov8_json'
-all_json = glob.glob(os.path.join(root,json_root,"*"))
-# all_json = [os.path.join(root,json_root,"ori1_resize_0.5hflip_sks_650_2.5e-6_1.0loss.json")]
+metric = CLIPScore(model_name_or_path="clip-vit-large-patch14").to(device)
+all_json = ["path.json"]
 all_json = sorted(all_json)
 for json_path in all_json:
     json_name = json_path.split('/')[-1]
