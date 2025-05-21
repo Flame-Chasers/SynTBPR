@@ -19,23 +19,89 @@ conda env create -f environment.yml
 
 ## Training
 
-### Training with Generated Data
 
-You can easily start the training using generated data with PyTorch's torchrun:
+### 🚀 Training with Generated Data
 
-```sh
-CUDA_VISIBLE_DEVICES=0,1,2,3 \
-torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_node=4 \
+You can easily start training using **generated data** with PyTorch's `torchrun`.
+
+* If you're using **a single GPU (e.g., 80G)**, only one process is needed and you can set a **larger batch size**.
+* If you're using **multiple GPUs**, launch multiple processes and adjust the batch size accordingly.
+
+#### ✅ Single-GPU Training (e.g., A100 80G)
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 \
+--nnodes=1 --nproc_per_node=1 \
 main.py
 ```
 
-### Training with Real Data
-Similarly, you can easily run the training using real data:
-```sh
+In `config/config.yaml`, set:
+
+```yaml
+batch_size: 320
+```
+
+#### ✅ Multi-GPU Training (e.g., 4× A100 40G)
+
+```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 \
-torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 --nproc_per_node=4 \
+torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 \
+--nnodes=1 --nproc_per_node=4 \
+main.py 
+```
+
+In `config/config.yaml`, set:
+
+```yaml
+batch_size: 80
+```
+
+---
+
+### 📦 Training with Real Data
+
+To train on **real data**, just add the `--real_data` flag. The same single-GPU / multi-GPU logic applies.
+
+#### ✅ Single-GPU Training with Real Data
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 \
+--nnodes=1 --nproc_per_node=1 \
 main.py --real_data
 ```
+
+In `config/real_data_config.yaml`, set:
+
+```yaml
+batch_size: 320
+```
+
+#### ✅ Multi-GPU Training with Real Data
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 \
+torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 \
+--nnodes=1 --nproc_per_node=4 \
+main.py --real_data
+```
+
+In `config/real_data_config.yaml`, set:
+
+```yaml
+batch_size: 80
+```
+
+---
+
+### 💡 Notes
+
+* The `batch_size` here refers to the **per-GPU batch size**.
+
+
+
+
 
 
 
