@@ -1,3 +1,4 @@
+import sys
 import datetime
 import os
 from pprint import pprint
@@ -15,7 +16,26 @@ from options import get_args
 from model.eva_clip import EVA_CLIP
 import json
 
+class Logger(object):
+    def __init__(self, filepath):
+        self.terminal = sys.stdout
+        self.log = open(filepath, "a", encoding="utf-8")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
 def run(config):
+
+    # log file
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    log_file_path = os.path.join(config.model.save_path, f"train_{timestamp}.log")
+    sys.stdout = Logger(log_file_path)
+    
     pprint(config)
 
     # data
