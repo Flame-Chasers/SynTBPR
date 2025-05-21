@@ -18,6 +18,10 @@ Image.MAX_IMAGE_PIXELS = None
 class ps_train_dataset(Dataset):
     def __init__(self, ann_root, image_root, transform, aug_ss, split, max_words=30):
         ann_file = os.path.join(ann_root, split + '_reid.json')
+
+        # image_root = ''
+        # ann_file = '/mnt/train_data/cm/lyx/Data/ICCV2025_Rebuttle/SD3/Image_to_text/ALL-SD3_ID29933_train_reid.json'
+
         anns = json.load(open(ann_file))
         self.transform = transform
 
@@ -26,6 +30,7 @@ class ps_train_dataset(Dataset):
         n = 0
         self.pairs = []
 
+        
         random.shuffle(anns)
         for ann in anns:
             image_path = os.path.join(image_root, ann['file_path'])
@@ -41,7 +46,7 @@ class ps_train_dataset(Dataset):
                 caption_bt = pre_caption(caption_bt, max_words)
                 self.pairs.append((image_path, caption, caption_bt, person_idx))
                 self.person2text[person_idx].append(caption)
-
+        print("len = ",len(self.pairs))
     def __len__(self):
         return len(self.pairs)
 

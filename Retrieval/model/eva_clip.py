@@ -88,16 +88,6 @@ class EVA_CLIP(nn.Module):
         self.use_gather = config.model.use_gather
         self.eps = config.experiment.ritc_eps
 
-        if config.experiment.ss:
-            structure = config.experiment.simclr_mlp
-            self.simclr_mlp = self._build_mlp(*structure)
-
-    def _build_mlp(self, in_dim=512, mlp_dim=512, out_dim=512):
-        return nn.Sequential(
-            nn.Linear(in_dim, mlp_dim),
-            nn.ReLU(inplace=True),
-            nn.Linear(mlp_dim, out_dim)
-        )
     
     def lock_image_tower(self, unlocked_groups=0, freeze_bn_stats=False):
         # lock image tower as per LiT - https://arxiv.org/abs/2111.07991

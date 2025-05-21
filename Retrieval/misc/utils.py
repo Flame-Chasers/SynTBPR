@@ -19,7 +19,7 @@ def parse_config(config_path):
 
 
 def is_using_distributed():
-    return True
+    return False
 
 
 def is_dist_avail_and_initialized():

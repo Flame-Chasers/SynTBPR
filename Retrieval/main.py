@@ -4,7 +4,6 @@ from pprint import pprint
 import random
 import time
 from pathlib import Path
-
 import torch
 
 from misc.build import load_checkpoint, cosine_scheduler, build_optimizer
@@ -50,7 +49,7 @@ def run(config):
     if is_using_distributed():
         model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[config.device],
                                                           find_unused_parameters=False)
-    model_without_ddp = model.module if config.distributed else model
+    model_without_ddp = model.module if is_using_distributed() else model
     
     # eval_result = test(model, dataloader['test_loader'], 77, config.device)
     # rank_1, rank_5, rank_10, map = eval_result['r1'], eval_result['r5'], eval_result['r10'], eval_result['mAP']

@@ -13,7 +13,8 @@ experiment:
   eda_alpha: 0.05
   text_length: 77
 
-
+  mlm: false
+  mlm_ratio: 1.0
   # loss
   nitc_ratio: 1.0
   nitc: true
@@ -27,8 +28,8 @@ experiment:
   ritc_ratio: 1.0
   
 schedule:
-  lr: 3.0e-5
-  epoch: 8
+  lr: 1.0e-4
+  epoch: 5
   epoch_warmup: 1
   lr_start: 1.0e-6
   lr_end: 5.0e-6
@@ -40,8 +41,8 @@ model:
   ckpt_type: eva  # original_clip / saved /eva
   read_path: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/output"
   read_name: "checkpoint_last_20241006_161323"
-  saved_path: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/output"
-  checkpoint: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/EVA02_CLIP_B_psz16_s8B.pt"    # e.g., '../../data/CLIP/ViT-B-16.pt'
+  saved_path: "/mnt/train_data/cm/lyx/Code/SynTBPR/Retrieval/output"
+  checkpoint: "/mnt/train_data/cm/lyx/Code/SynTBPR/Retrieval/EVA02_CLIP_B_psz16_s8B.pt"    # e.g., '../../data/CLIP/ViT-B-16.pt'
   use_gather: true
   softlabel_ratio: 0.005
   softlabel_type: sigmoid
@@ -53,7 +54,7 @@ log:
   print_period: 50
 
 data:
-  batch_size: 80
+  batch_size: 320
   test_batch_size: 256
   num_workers: 8
 
@@ -61,5 +62,5 @@ distributed:
   backend: nccl
   url: 'env://'
 
-anno_dir: '/data/zzy/datasets/CUHK-PEDES/processed_data'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
-image_dir: '/data/zzy/datasets/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES
+anno_dir: '/mnt/train_data/cm/lyx/Data/CUHK-PEDES/processed_data'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
+image_dir: '/mnt/train_data/cm/lyx/Data/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES
