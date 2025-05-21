@@ -19,6 +19,18 @@ def parse_config(config_path):
 
 
 def is_using_distributed():
+    # 优先判断是否已经初始化分布式
+    if dist.is_available() and dist.is_initialized():
+        return True
+
+    # 判断环境变量中是否设置了分布式训练的关键参数
+    if "RANK" in os.environ and "WORLD_SIZE" in os.environ:
+        return int(os.environ["WORLD_SIZE"]) > 1
+
+    # 如果只设置了 LOCAL_RANK，也可能是单机多卡
+    if "LOCAL_RANK" in os.environ:
+        return True
+
     return False
 
 

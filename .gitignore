@@ -1,0 +1,5 @@
+# 忽略模型文件
+Retrieval/EVA02_CLIP_B_psz16_s8B.pt
+
+# 忽略输出目录
+Retrieval/output/

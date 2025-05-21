@@ -28,7 +28,7 @@ experiment:
   ritc_ratio: 1.0
   
 schedule:
-  lr: 3.0e-5
+  lr: 5.0e-5
   epoch: 8
   epoch_warmup: 1
   lr_start: 1.0e-6
@@ -38,11 +38,9 @@ schedule:
   eps: 1.0e-8
 
 model:
-  ckpt_type: eva  # original_clip / saved /eva
-  read_path: "/data/zzy/project/SynTBPR/TBPS-EVACLIP-master-ori/output"
-  read_name: "checkpoint_last_20241006_161323"
-  saved_path: "/mnt/train_data/cm/lyx/Code/SynTBPR/Retrieval/output"
-  checkpoint: "/mnt/train_data/cm/lyx/Code/SynTBPR/Retrieval/EVA02_CLIP_B_psz16_s8B.pt"    # e.g., '../../data/CLIP/ViT-B-16.pt'
+  ckpt_type: eva  # original_clip / saved /  eva
+  save_path: "output"
+  checkpoint: "EVA02_CLIP_B_psz16_s8B.pt"    # e.g., '../../data/CLIP/ViT-B-16.pt'
   use_gather: true
   softlabel_ratio: 0.005
   softlabel_type: sigmoid
@@ -62,5 +60,8 @@ distributed:
   backend: nccl
   url: 'env://'
 
-anno_dir: '/mnt/train_data/cm/lyx/Data/CUHK-PEDES/processed_data'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
-image_dir: '/mnt/train_data/cm/lyx/Data/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES
+train_anno_dir: 'Data/CUHK-PEDES/processed_data/train_reid.json'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
+train_image_dir: 'Data/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES
+
+test_anno_dir: 'Data/CUHK-PEDES/processed_data/test_reid.json'    # e.g., 'data/CUHK-PEDES'  RSTPReid  ICFG-PEDES
+test_image_dir: 'Data/CUHK-PEDES/imgs'     # e.g., '../../datasets/cuhkpedes/imgs'  RSTPReid  ICFG-PEDES

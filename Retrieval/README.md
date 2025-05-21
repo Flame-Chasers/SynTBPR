@@ -37,8 +37,6 @@ torchrun --rdzv_id=3 --rdzv_backend=c10d --rdzv_endpoint=localhost:0 --nnodes=1 
 main.py --real_data
 ```
 
-## Model Checkpoints
-- [ ] Release checkpoints
 
 
 ## Acknowledgement

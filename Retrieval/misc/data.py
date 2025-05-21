@@ -116,8 +116,8 @@ def build_pedes_data(config):
     aug = Choose(rand_from, size)
     aug_ss = get_self_supervised_augmentation(size)
 
-    train_dataset = ps_train_dataset(config.anno_dir, config.image_dir, aug, aug_ss, split='train', max_words=77)
-    test_dataset = ps_eval_dataset(config.anno_dir, config.image_dir, val_transform, split='test', max_words=77)
+    train_dataset = ps_train_dataset(config.train_anno_dir, config.test_image_dir, aug, aug_ss, split='train', max_words=77)
+    test_dataset = ps_eval_dataset(config.test_anno_dir, config.test_image_dir, val_transform, split='test', max_words=77)
 
     if is_using_distributed():
         train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)

@@ -58,7 +58,7 @@ def load_checkpoint(model, config):
             else:
                 new_state[name] = params
     elif config.model.ckpt_type == 'saved':
-        ckpt = torch.load(os.path.join(config.model.read_path, f'{config.model.read_name}.pth'), map_location='cpu')
+        ckpt = torch.load(os.path.join(config.model.save_path, f'checkpoint_best.pth'), map_location='cpu')
         new_state = ckpt['model']
     elif config.model.ckpt_type == "eva":
         with open(config.model.checkpoint, 'rb') as opened_file:

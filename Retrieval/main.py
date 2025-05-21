@@ -51,12 +51,6 @@ def run(config):
                                                           find_unused_parameters=False)
     model_without_ddp = model.module if is_using_distributed() else model
     
-    # eval_result = test(model, dataloader['test_loader'], 77, config.device)
-    # rank_1, rank_5, rank_10, map = eval_result['r1'], eval_result['r5'], eval_result['r10'], eval_result['mAP']
-    # print('Acc@1 {top1:.5f} Acc@5 {top5:.5f} Acc@10 {top10:.5f} mAP {mAP:.5f}'.format(top1=rank_1, top5=rank_5,
-    #                                                                                 top10=rank_10, mAP=map))
-    # print(1 / 0)
-
     # schedule
     config.schedule.niter_per_ep = len(train_loader)
     lr_schedule = cosine_scheduler(config)
@@ -132,7 +126,7 @@ def run(config):
                     'optimizer': optimizer.state_dict(),
                     'config': config,
                 }
-                torch.save(save_obj, os.path.join(config.model.saved_path, 'checkpoint_best.pth'))
+                torch.save(save_obj, os.path.join(config.model.save_path, 'checkpoint_best.pth'))
 
         print(f"best Acc@1: {best_rank_1} at epoch {best_epoch + 1}")
 
@@ -145,7 +139,7 @@ if __name__ == '__main__':
         config_path = 'config/real_data_config.yaml'
     config = parse_config(config_path)
 
-    Path(config.model.saved_path).mkdir(parents=True, exist_ok=True)
+    Path(config.model.save_path).mkdir(parents=True, exist_ok=True)
 
     init_distributed_mode(config)
 
