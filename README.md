@@ -32,7 +32,7 @@ In this paper, we conduct an empirical study to explore the potential of synthet
 
 ## 🖨 Dataset
 
-The dataset is released at [Baidu Yun]( https://pan.baidu.com/s/1-n1t7dvHij7JqAAH9BAP9g?pwd=kbev) [kbev]
+The dataset is released at [Baidu Yun]( https://pan.baidu.com/s/1-n1t7dvHij7JqAAH9BAP9g?pwd=kbev) [kbev] and [Hugging Face](https://huggingface.co/datasets/Junesnow/SynTBPR)
 
 ## 💾 Checkpoints
 
